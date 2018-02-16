@@ -27,20 +27,7 @@ body {
     font-weight: bold;
     padding-bottom: 30px;
     margin-left: 520px;
-    margin-right: 120px;
-    
-}
-
-#buttons {
-    width:90px;
-    height: 30px;
-    background-color: #f8efe7;
-    word-spacing: .4em;
-    font-family: "Poirot One", Arial, Helvetica, sans-serif;
-    font-size: 16px;
-    color: #8e8175;
-    border-radius: 12px;
-    padding:2px;
+    margin-right: 120px; 
 }
 
 #selectprod {
@@ -49,10 +36,10 @@ body {
     text-align: center;
 }
 
-#content {
+#image-container {
     list-style: none;
     float: left; 
-    margin: 30px 40px 30px 200px;
+    margin: 5% 5% 5% 13%;
     text-align: center;
 }
 
@@ -66,18 +53,18 @@ body {
 }
 
 #results1{
-    padding-top: 15px;
+    padding-top: 10px;
     color:#5f564e;   
 }
 
 footer {
-    height: 75px;
+    height: 150px;
     color: #5f564e;
     text-align: center;
     font-weight: bold;
     font-family: "Poirot One", Arial, Helvetica, sans-serif;
     font-size: 16px;
-    background-color: #ead8c0;
+    background-color: #ccd8c3;
     margin-top: 50px;
     padding-top: 15px;  
 }

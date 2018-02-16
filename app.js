@@ -12,7 +12,6 @@ var imgEl2 = document.getElementById('image-two');
 var imgEl3 = document.getElementById('image-three');
 var total = document.getElementById('total');
 var numLoops = 25;
-var displayed = false;
 
 //use my constructor function to create new Product instances
 new Product('Bag', 'images/bag.jpg');
@@ -167,10 +166,8 @@ function showRandomImages() {
 
 } // EOF - showRandomImages.
 
-imgEl1.addEventListener('click', function () {
-  event.preventDefault();
+function handleClick1() {
   firstRandom.clicked++;
-
   if (counter < numLoops) {
     showRandomImages();
   }
@@ -178,12 +175,13 @@ imgEl1.addEventListener('click', function () {
     disableImageOnClick();
     calculateResults();
   }
-});
+}
 
-imgEl2.addEventListener('click', function () {
-  event.preventDefault();
+imgEl1.addEventListener('click', handleClick1);
+
+function handleClick2() {
   secondRandom.clicked++;
-
+  
   if (counter < numLoops) {
     showRandomImages();
   }
@@ -191,12 +189,12 @@ imgEl2.addEventListener('click', function () {
     disableImageOnClick();
     calculateResults();
   }
-});
+}
 
-imgEl3.addEventListener('click', function () {
-  event.preventDefault();
+imgEl2.addEventListener('click', handleClick2);
+
+function handleClick3() {
   thirdRandom.clicked++;
-
   if (counter < numLoops) {
     showRandomImages();
   }
@@ -204,12 +202,15 @@ imgEl3.addEventListener('click', function () {
     disableImageOnClick();
     calculateResults();
   }
-});
+}
+imgEl3.addEventListener('click', handleClick3);
 
 function disableImageOnClick(){
-  imgEl1.onclick = null;
-  imgEl2.onclick = null;
-  imgEl3.onclick = null;
+
+  imgEl1.removeEventListener('click', handleClick1);
+  imgEl2.removeEventListener('click', handleClick2);
+  imgEl3.removeEventListener('click', handleClick3);
+
 }
 
 function makeHeaderRow(total) {
@@ -232,28 +233,24 @@ function makeHeaderRow(total) {
 }
 
 function calculateResults() {
-  if (displayed === false) {
-    makeHeaderRow(total);
+  makeHeaderRow(total);
 
-    for (var l = 0; l < allProducts.length; l++) {
-      var trEl = document.createElement('tr');
-      var tdEl_productName = document.createElement('td');
-      var tdEl_numDisplayed = document.createElement('td');
-      var tdEl_clicked = document.createElement('td');
+  for (var l = 0; l < allProducts.length; l++) {
+    var trEl = document.createElement('tr');
+    var tdEl_productName = document.createElement('td');
+    var tdEl_numDisplayed = document.createElement('td');
+    var tdEl_clicked = document.createElement('td');
 
-      tdEl_productName.textContent = allProducts[l].name;
-      tdEl_numDisplayed.textContent = allProducts[l].shown;
-      tdEl_clicked.textContent = allProducts[l].clicked;
+    tdEl_productName.textContent = allProducts[l].name;
+    tdEl_numDisplayed.textContent = allProducts[l].shown;
+    tdEl_clicked.textContent = allProducts[l].clicked;
 
-      trEl.appendChild(tdEl_productName);
-      trEl.appendChild(tdEl_numDisplayed);
-      trEl.appendChild(tdEl_clicked);
-      console.log('Calculating results');
-      total.appendChild(trEl);
-
-      //this is to handle multiple click events from displaying
-      displayed = true;
-    }
+    trEl.appendChild(tdEl_productName);
+    trEl.appendChild(tdEl_numDisplayed);
+    trEl.appendChild(tdEl_clicked);
+    console.log('Calculating results');
+    total.appendChild(trEl);
   }
 }
+
 
