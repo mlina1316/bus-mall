@@ -1,44 +1,44 @@
 <!DOCTYPE html>
 <html>
-
 <head>
-  <meta charset="utf-8" />
-  <title>Market Research</title>
-  <link rel="stylesheet" type="text/css" href="style.css" />
-  <link href="https://fonts.googleapis.com/css?family=Poiret+One" rel="stylesheet">
+    <meta charset="utf-8" />
+    <title>Market Research</title>
+    <link rel="stylesheet" type="text/css" href="style.css" />
+    <link href="https://fonts.googleapis.com/css?family=Poiret+One" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Bilbo+Swash+Caps" rel="stylesheet">
 </head>
-
 <body>
-  <div id="header">
-    <img id="bus" src="http://placehold.it/200x70/000000" />
-    <p id="head1">Market Research</p>
-    <button id="buttons">Home</button>
-    <button id="buttons">Products</button>
-    <button id="buttons">About Us</button>
-    <button id="buttons">Contact</button>
-  </div>
-  <!-- end of header div -->
+    <div id="header">
+        <p id="bus">Bus Mall</p>
+        <p id="head1">Market Research</p>
+        <a href="#" class = "on">Home</a>
+        <a href="#products">Products</a>
+        <a href="#aboutus">About Us</a>
+        <a href="#contact">Contact</a>
+    </div> <!-- end of header div -->
 
-  <div id="content">
-    <h2 id="selectprod">Select and vote for your favorite product!</h2>
-    <div id = "threeprods">
-      <img class="prodimages" id="product-pic1" src="" alt="">
-      <img class="prodimages" id="product-pic2" src="" alt="">
-      <img class="prodimages" id="product-pic3" src="" alt="">
-    </div>
-  </div> <!-- end of content div -->
-  
-  <div id="results">
-    <h2 id="results1">Results of Your Votes</h2>
-    <table id="total"></table>
-  </div>
-  <!-- end of results div -->
+    <section id="image-container">
+        <h2 id="selectprod">Click on the picture and vote for your favorite product!</h2>
+        <img id="image-one">
+        <img id="image-two">
+        <img id="image-three">
 
-  <footer>
-    <p>&copy 2018</p>
-  </footer>
-  <!-- end of footer -->
-  <script src="app.js"></script>
+    </section> <!-- end of content section -->
+
+    <div id="results">
+        <h2 id="results1">Results of Your Votes</h2>
+        <table id="total"></table>
+    </div> <!-- end of results div -->
+
+    <footer>
+        <p id="products">PRODUCTS: We have over 15 products to choose from.</p>
+        <p id="aboutus">ABOUT US: We are located in Seattle and are testing products for the BusMall magazine.</p>
+        <p id="contact">CONTACT US<br>
+            Email: <a href="mailto:busmall@busmall.org">busmall@busmall.org</a><br>
+            Phone: 425-425-000
+        </p>
+    </footer> <!-- end of footer -->
+    
+    <script src="app.js"></script>
 </body>
-
 </html>
