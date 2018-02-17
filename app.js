@@ -12,7 +12,6 @@ var imgEl2 = document.getElementById('image-two');
 var imgEl3 = document.getElementById('image-three');
 var total = document.getElementById('total');
 var numLoops = 25;
-var displayed = false;
 
 //use my constructor function to create new Product instances
 new Product('Bag', 'images/bag.jpg');
@@ -167,10 +166,8 @@ function showRandomImages() {
 
 } // EOF - showRandomImages.
 
-imgEl1.addEventListener('click', function () {
-  event.preventDefault();
+function handleClick1() {
   firstRandom.clicked++;
-
   if (counter < numLoops) {
     showRandomImages();
   }
@@ -178,12 +175,13 @@ imgEl1.addEventListener('click', function () {
     disableImageOnClick();
     calculateResults();
   }
-});
+}
 
-imgEl2.addEventListener('click', function () {
-  event.preventDefault();
+imgEl1.addEventListener('click', handleClick1);
+
+function handleClick2() {
   secondRandom.clicked++;
-
+  
   if (counter < numLoops) {
     showRandomImages();
   }
@@ -191,12 +189,12 @@ imgEl2.addEventListener('click', function () {
     disableImageOnClick();
     calculateResults();
   }
-});
+}
 
-imgEl3.addEventListener('click', function () {
-  event.preventDefault();
+imgEl2.addEventListener('click', handleClick2);
+
+function handleClick3() {
   thirdRandom.clicked++;
-
   if (counter < numLoops) {
     showRandomImages();
   }
@@ -204,12 +202,15 @@ imgEl3.addEventListener('click', function () {
     disableImageOnClick();
     calculateResults();
   }
-});
+}
+imgEl3.addEventListener('click', handleClick3);
 
 function disableImageOnClick(){
-  imgEl1.onclick = null;
-  imgEl2.onclick = null;
-  imgEl3.onclick = null;
+
+  imgEl1.removeEventListener('click', handleClick1);
+  imgEl2.removeEventListener('click', handleClick2);
+  imgEl3.removeEventListener('click', handleClick3);
+
 }
 
 function makeHeaderRow(total) {
@@ -232,28 +233,66 @@ function makeHeaderRow(total) {
 }
 
 function calculateResults() {
-  if (displayed === false) {
-    makeHeaderRow(total);
+  makeHeaderRow(total);
 
-    for (var l = 0; l < allProducts.length; l++) {
-      var trEl = document.createElement('tr');
-      var tdEl_productName = document.createElement('td');
-      var tdEl_numDisplayed = document.createElement('td');
-      var tdEl_clicked = document.createElement('td');
+  for (var l = 0; l < allProducts.length; l++) {
+    var trEl = document.createElement('tr');
+    var tdEl_productName = document.createElement('td');
+    var tdEl_numDisplayed = document.createElement('td');
+    var tdEl_clicked = document.createElement('td');
 
-      tdEl_productName.textContent = allProducts[l].name;
-      tdEl_numDisplayed.textContent = allProducts[l].shown;
-      tdEl_clicked.textContent = allProducts[l].clicked;
+    tdEl_productName.textContent = allProducts[l].name;
+    tdEl_numDisplayed.textContent = allProducts[l].shown;
+    tdEl_clicked.textContent = allProducts[l].clicked;
 
-      trEl.appendChild(tdEl_productName);
-      trEl.appendChild(tdEl_numDisplayed);
-      trEl.appendChild(tdEl_clicked);
-      console.log('Calculating results');
-      total.appendChild(trEl);
-
-      //this is to handle multiple click events from displaying
-      displayed = true;
-    }
+    trEl.appendChild(tdEl_productName);
+    trEl.appendChild(tdEl_numDisplayed);
+    trEl.appendChild(tdEl_clicked);
+    console.log('Calculating results');
+    total.appendChild(trEl);
   }
+  generateChart();
 }
 
+function generateChart() {
+  var chartLabels = [];
+  var chartValues = [];
+  for (var m =0; m<allProducts.length; m++){
+    chartLabels[m] = allProducts[m].name;
+    chartValues[m] = allProducts[m].clicked;
+  }
+
+  var labelColors = ['rgba(227, 97, 97, 1)',
+    'rgba(217, 89, 183, 1)',
+    'rgba(191, 38, 79, 1)',
+    'rgba(140, 148, 14, 1)',
+    'rgba(221,82,6, 1)',
+    'rgba(112, 146, 216, 1)',
+    'rgba(255,99,132,1)',
+    'rgba(54, 162, 235, 1)',
+    'rgba(255, 206, 86, 1)',
+    'rgba(75, 192, 192, 1)',
+    'rgba(153, 102, 255, 1)',
+    'rgba(255, 159, 64, 1)',
+    'rgba(1107, 78, 78, 1)',
+    'rgba(69, 22, 17, 1)',
+    'rgba(55, 142, 167, 1)',
+    'rgba(80, 100, 71, 1)',
+    'rgba(120, 152, 122, 1)',
+    'rgba(0, 96, 128, 1)',
+    'rgba(128, 0, 32, 1)'];
+
+  var ctx = document.getElementById('chart').getContext('2d');
+
+  var myChart = new Chart(ctx, {
+    type: 'bar',
+    data: {
+      labels: chartLabels,
+      datasets: [{
+        label: '# of Clicks',
+        data: chartValues,
+        backgroundColor: labelColors
+      }]
+    },
+  });
+}
