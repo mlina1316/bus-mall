@@ -1,17 +1,20 @@
-
 body {
     background-color:#ffd8c3; 
 }
 
 #header {
     background-color: #ccd8c3;
-    height: 150px;   
+    height: 170px;   
 }
 
 #bus{
     padding-left: 25px;
     padding-top: 15px;
-
+    font-family: "Bilbo Swash Caps", Arial, Helvetica, sans-serif;
+    font-weight: bolder;
+    font-size: 36px;
+    font-style: italic;
+    color:#cc845f;
 }
 
 #head1 {
@@ -21,27 +24,9 @@ body {
     text-align: center;
     font-size: 36px;
     font-weight: bold;
-    margin-left: 320px;
-    margin-right: 110px;
-}
-
-#buttons {
-    width:90px;
-    height: 30px;
-    background-color: #f8efe7;
-    word-spacing: .4em;
-    font-family: "Poirot One", Arial, Helvetica, sans-serif;
-    font-size: 16px;
-    color: #8e8175;
-    border-radius: 12px;
-    padding:2px;
-}
-
-.prodimages {
-    width: 300px;
-    height: 350px;
-    margin-top: 30px;
-    margin-left: 50px;
+    padding-bottom: 30px;
+    margin-left: 520px;
+    margin-right: 120px; 
 }
 
 #selectprod {
@@ -50,44 +35,93 @@ body {
     text-align: center;
 }
 
-#content {
+#image-container {
     list-style: none;
-    margin-top: 30px;
+    float: left; 
+    margin: 5% 5% 5% 13%;
     text-align: center;
 }
 
-
 #results {
-    width: 960px;
-    margin-left: 200px;
-    height: 450px;
-    background-color: #ddd8c3;
+    width: 600px;
+    margin-left: 400px;
+    margin-top: 550px;
+    background-color: #ccd8c3;
     text-align: center;
     font-family: "Poirot One", Arial, Helvetica, sans-serif;
 }
 
 #results1{
-    padding-top: 15px;
+    padding-top: 10px;
     color:#5f564e;   
 }
 
 footer {
-    height: 75px;
+    height: 150px;
     color: #5f564e;
     text-align: center;
     font-weight: bold;
     font-family: "Poirot One", Arial, Helvetica, sans-serif;
     font-size: 16px;
-    background-color: #ead8c0;
+    background-color: #ccd8c3;
     margin-top: 50px;
     padding-top: 15px;  
 }
-/*
-.prods {
-    display: inline-block;
-} */
-/*#product-pic {
-    border: 2px solid red;
-    height: 300px;
-    width: auto;
-}*/
+ #image-one {
+     width: 300px;
+     height: 375px;
+     padding-right:30px; 
+     padding-top: 30px;
+ }
+ #image-two {
+    width: 300px;
+    height: 375px;
+    padding-right:30px; 
+    padding-top: 30px;
+}
+#image-three {
+    width: 300px;
+    height: 375px;
+    padding-right:30px; 
+    padding-top: 30px; 
+}
+
+#table {
+    width: 600px;
+    padding: 30px 15px 15px 15px;
+    border-spacing: 2px 2px;
+    border-style: groove;
+    margin-left: 20%;
+    letter-spacing: 0.1em;
+    color: #5f564e;
+    font-family: "Poirot One", Arial, Helvetica, sans-serif;
+    text-align: center;   
+}
+tr:first-child {
+    background-color:#ccd8c3;
+    padding-top: 15px;
+    height: 40px;
+    text-align: center;
+    font-family: Helvetica;
+}
+
+tr:nth-child(even) {
+    background-color:#ccd8c3;
+    height: 40px;
+    text-align: center;
+    font-family: Helvetica;
+}
+
+tr:nth-child(odd) {
+    background-color:#ccd8c3;
+    height: 40px;
+    text-align: center;
+    font-family: Helvetica;
+}
+
+tr:last-child {
+    background-color:#ccd8c3;
+    height: 40px;
+    text-align: center;
+    font-family: Helvetica;
+} 
