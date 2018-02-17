@@ -13,33 +13,54 @@ var imgEl3 = document.getElementById('image-three');
 var total = document.getElementById('total');
 var numLoops = 25;
 
-//use my constructor function to create new Product instances
-new Product('Bag', 'images/bag.jpg');
-new Product('Banana', 'images/banana.jpg');
-new Product('Bathroom', 'images/bathroom.jpg');
-new Product('Boots', 'images/boots.jpg');
-new Product('Breakfast', 'images/breakfast.jpg');
-new Product('Bubblegum', 'images/bubblegum.jpg');
-new Product('Chair', 'images/chair.jpg');
-new Product('Cthulhu', 'images/cthulhu.jpg');
-new Product('Dog-duck', 'images/dog-duck.jpg');
-new Product('Dragon', 'images/dragon.jpg');
-new Product('Pen', 'images/pen.jpg');
-new Product('Pet-sweep', 'images/pet-sweep.jpg');
-new Product('Tauntaun', 'images/tauntaun.jpg');
-new Product('Unicorn', 'images/unicorn.jpg');
-new Product('Usb', 'images/usb.gif');
-new Product('Water-can', 'images/water-can.jpg');
-new Product('Wine-glass', 'images/wine-glass.jpg');
+//Load from local storage.
+if (localStorage.products) {
+  var strProducts = localStorage.getItem('products');
+  var products = JSON.parse(strProducts);
+  console.log(products);
+  for (var prod of products) {
+    console.log(prod);
+    new Product(prod.name, prod.filepath, prod.shown, prod.clicked);
+  }
+  calculateResults();
+  console.log('I am here!');
+  disableImageOnClick();
+}
+else {
+  //use my constructor function to create new Product instances
+  new Product('Bag', 'images/bag.jpg');
+  new Product('Banana', 'images/banana.jpg');
+  new Product('Bathroom', 'images/bathroom.jpg');
+  new Product('Boots', 'images/boots.jpg');
+  new Product('Breakfast', 'images/breakfast.jpg');
+  new Product('Bubblegum', 'images/bubblegum.jpg');
+  new Product('Chair', 'images/chair.jpg');
+  new Product('Cthulhu', 'images/cthulhu.jpg');
+  new Product('Dog-duck', 'images/dog-duck.jpg');
+  new Product('Dragon', 'images/dragon.jpg');
+  new Product('Pen', 'images/pen.jpg');
+  new Product('Pet-sweep', 'images/pet-sweep.jpg');
+  new Product('Tauntaun', 'images/tauntaun.jpg');
+  new Product('Unicorn', 'images/unicorn.jpg');
+  new Product('Usb', 'images/usb.gif');
+  new Product('Water-can', 'images/water-can.jpg');
+  new Product('Wine-glass', 'images/wine-glass.jpg');
+}
+
+function storeLocalStorage() {
+  var strProducts = JSON.stringify(allProducts);
+  localStorage.setItem("products", strProducts);
+  console.log(strProducts);
+}
 
 showRandomImages();
 
 //make my constructor function
-function Product(name, filepath) {
+function Product(name, filepath, shown = 0, clicked = 0) {
   this.name = name;
   this.filepath = filepath;
-  this.shown = 0;
-  this.clicked = 0;
+  this.shown = shown;
+  this.clicked = clicked;
 
   allProducts.push(this);
 }
@@ -64,7 +85,7 @@ function showRandomImages() {
     // Generate new index and check against previous 3 images.
     newImageIndex = randomProductIndex();
 
-    // Set Unique to true as we start with the assumption that we got a unique
+    // Set unique to true as we start with the assumption that we got a unique
     // index and will try to negate that.
     unique = true;
 
@@ -76,7 +97,7 @@ function showRandomImages() {
         break;
       }
     }
-    // If Unique is still true then we have found the first image.
+    // If unique is still true then we have found the first image.
     if (unique === true) {
       firstRandom = allProducts[newImageIndex];
       console.log('firstRandom: ', firstRandom);
@@ -91,7 +112,7 @@ function showRandomImages() {
     // Generate new index and check against previous 3 images + firstRandom.
     newImageIndex = randomProductIndex();
 
-    // Set Unique to true as we start with the assumption that we got a unique
+    // Set unique to true as we start with the assumption that we got a unique
     // index and will try to negate that.
     unique = true;
 
@@ -108,7 +129,7 @@ function showRandomImages() {
       unique = false;
     }
 
-    // If Unique is still true then we have found the second image.
+    // If unique is still true then we have found the second image.
     if (unique === true) {
       secondRandom = allProducts[newImageIndex];
       console.log('secondRandon: ', secondRandom);
@@ -122,7 +143,7 @@ function showRandomImages() {
     // Generate new index and check against previous 3 images + firstRandom and secondRandom.
     newImageIndex = randomProductIndex();
 
-    // Set Unique to true as we start with the assumption that we got a unique
+    // Set unique to true as we start with the assumption that we got a unique
     // index and will try to negate that.
     unique = true;
 
@@ -139,7 +160,7 @@ function showRandomImages() {
       unique = false;
     }
 
-    // If Unique is still true then we have found the third image.
+    // If unique is still true then we have found the third image.
     if (unique === true) {
       thirdRandom = allProducts[newImageIndex];
       console.log('thirdRandom: ', thirdRandom);
@@ -177,7 +198,9 @@ function handleClick1() {
   }
 }
 
-imgEl1.addEventListener('click', handleClick1);
+if (!localStorage.products) {
+  imgEl1.addEventListener('click', handleClick1);
+}
 
 function handleClick2() {
   secondRandom.clicked++;
@@ -191,7 +214,9 @@ function handleClick2() {
   }
 }
 
-imgEl2.addEventListener('click', handleClick2);
+if (!localStorage.products) {
+  imgEl2.addEventListener('click', handleClick2);
+}
 
 function handleClick3() {
   thirdRandom.clicked++;
@@ -203,7 +228,10 @@ function handleClick3() {
     calculateResults();
   }
 }
-imgEl3.addEventListener('click', handleClick3);
+
+if (!localStorage.products) {
+  imgEl3.addEventListener('click', handleClick3);
+}
 
 function disableImageOnClick(){
 
@@ -252,6 +280,7 @@ function calculateResults() {
     total.appendChild(trEl);
   }
   generateChart();
+  storeLocalStorage();
 }
 
 function generateChart() {
@@ -296,3 +325,10 @@ function generateChart() {
     },
   });
 }
+
+var clearLS = document.getElementById('clearSession');
+
+clearLS.addEventListener('click', function() {
+  console.log('click it!');
+  localStorage.clear();
+});
